@@ -1,0 +1,45 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %} Home {% endblock title%}
+
+{% block css %}
+<style type="text/css" media="all">
+ html, body{
+   color: white;
+   background: url("{% static 'myapp/images/bg-image.jpg' %}") no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+ }
+</style>
+{% endblock css %}
+
+{% block main-content %}
+ <div class="container my-4 p-3">
+   <h2 class="text-center alert alert-primary"><u>Indian Railways Available Trains</u></h2>
+   {% if all_train %}
+   {% for tn in all_train%}
+   <div class="row border border-white">
+    <div class="col-sm-5 col-5">
+      <img class="my-4 z-depth-0" src="{% static 'myapp/images/book.jpg' %}" width="100%" height="auto" alt="" />
+    </div>
+    <div class="col-sm-7 col-7 my-4">
+      <ul>
+        <li class="fw-bold"><span style="color:red">No -</span> {{tn.train_no}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Name -</span> {{tn.train_name}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Source -</span> {{tn.train_from}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Destination -</span> {{tn.train_to}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Total Fair -</span> {{tn.train_price}}</li>
+        <hr />
+      </ul>
+    </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+ </div>
+{% endblock main-content %}

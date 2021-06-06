@@ -1,0 +1,80 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %} Home {% endblock title%}
+
+{% block css %}
+<style type="text/css" media="all">
+html, body{
+  color: white;
+   background: url("{% static 'myapp/images/bg-image.jpg' %}") no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+ }
+</style>
+{% endblock css %}
+
+{% block main-content %}
+ <div class="container my-4 p-3">
+   <h2 class="fw-bold text-center alert-primary">Railway Enquiry System</h2>
+   <hr class="muted-text" />
+   <h4 class="fw-bold text-center text-white"><img class="rounded-circle img-fluid img-thumnail" src="{% static 'myapp/images/logo.jpg' %}" width="30vw" height="30vh" /> Indian Railways</h4>
+   <hr class="muted-text" />
+   <div class="row">
+     <div class="col-sm-6"><a href="{% url 'trainspot' %}" class="text-decoration-none"><div class="bg-warning text-center rounded-square">
+         <i class="fas fa-search fa-lg text-center"></i><br />
+         <p class="fw-bold text-center">Search Your Train</p></a>
+       </div>
+     </div>
+    <div class="col-sm-6"><a class="text-decoration-none" href="{% url 'schedule' %}">
+       <div class="bg-warning rounded-square">
+         <center><i class="fas fa-calendar-alt fa-lg"></i></center>
+         <p class="fw-bold text-center">Train Schedule</p></a>
+       </div>
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-sm-6"><a class="text-decoration-none" href="{% url 'booktrain' %}">
+       <div class="bg-warning text-center rounded-square">
+         <i class="fas fa-exchange-alt fa-lg text-center"></i><br />
+         <p class="fw-bold text-center">Book Train</p></a>
+       </div>
+     </div>
+     <div class="col-sm-6"><a class="text-decoration-none" href="{% url 'cancel' %}">
+       <div class="bg-warning rounded-square">
+         <center><i class="fas fa-times fa-lg"></i></center>
+         <p class="fw-bold text-center"> Cancelled Train</p></a>
+       </div>
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-sm-6"><a class="text-decoration-none" href="{% url 'reschedule' %}">
+       <div class="bg-warning text-center rounded-square">
+         <i class="fas fa-clock fa-lg text-center"></i><br />
+         <p class="fw-bold text-center">Rescheduled Train</p></a>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="bg-warning rounded-square"><a class="text-decoration-none" href="{% url 'status' %}">
+         <center><i class="fas fa-question-circle fa-lg"></i></center>
+         <p class="fw-bold text-center">PNR Status</p></a>
+       </div>
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-sm-6"><a class="text-decoration-none" href="{% url 'login' %}">
+       <div class="bg-warning text-center rounded-square">
+         <i class="fas fa-user fa-lg text-center"></i><br />
+         <p class="fw-bold text-center">User Login</p></a>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="bg-warning rounded-square"><a class="text-decoration-none" href="{% url 'signup' %}">
+         <center><i class="fas fa-ticket-alt fa-lg"></i></center>
+         <p class="fw-bold text-center">User Registration</p></a>
+       </div>
+     </div>
+   </div>
+ </div>
+{% endblock main-content %}

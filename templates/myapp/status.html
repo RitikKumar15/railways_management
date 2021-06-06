@@ -1,0 +1,61 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block css %}
+<style type="text/css" media="all">
+html, body{
+  color: white;
+   background: url("{% static 'myapp/images/bg-image.jpg' %}") no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+ }
+ 
+ table, tr, th, td{
+   border: 1px solid white;
+   color: white;
+   text-align: center;
+ }
+ </style>
+ {% endblock css %}
+ 
+ {% block main-content %}
+  <div class="container my-3">
+    <h1 class="fw-bold text-center"><u>Your Book Tickets!</u></h1>
+    {% if tickets %}
+     <table class="table hover mt-3">
+       <thead>
+         <th scope="col">Train No</th>
+         <th scope="col">Train Name</th>
+         <th scope="col">Train Source</th>
+         <th scope="col">Train Destination</th>
+         <th scope="col">Train Price</th>
+         <th scope="col">Train Seat No</th>
+       </thead>
+       <tbody>
+       {% for ticket in tickets %}
+        <tr>
+          <td>{{ticket.train.train_no}}</td>
+          <td>{{ticket.train.train_name}}</td>
+          <td>{{ticket.train.train_from}}</td>
+          <td>{{ticket.train.train_to}}</td>
+          <td>{{ticket.train.train_price}}</td>
+          <td>{{seat_no}}</td>
+        </tr>
+       {% endfor %}
+       </tbody>
+     </table>
+     {% else %}
+      {% if messages %}
+       {% for message in messages %}
+         <p {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %} role="alert">
+           {{message}}
+           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </p>
+       {% endfor%}
+     {% endif %}
+    {% endif %}
+  </div>
+{% endblock main-content%}
