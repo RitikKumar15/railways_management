@@ -1,0 +1,53 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}Spot Your Train{% endblock title %}
+
+{% block css %}
+<style type="text/css" media="all">
+html, body{
+  color: white;
+   background: url("{% static 'myapp/images/bg-image.jpg' %}") no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+ }
+ 
+ li{
+   list-style-type: none;
+ }
+</style>
+{% endblock css %}
+
+{% block main-content %}
+{% if messages %}
+ {% for msg in messages %}
+  <div class="alert alert-success">
+    {{msg}}
+  </div>
+ {% endfor %}
+{% endif %}
+<div class="container my-3">
+  <h1 class="text-center"><u>Your Ticket Details!</u></h1>
+  <div class="row">
+    <div class="col-sm-5">
+      <img class="my-4 img-fluid img-thumnail border-right" src="{% static 'myapp/images/book.jpg' %}" width="100%" height="auto" alt="" />
+    </div>
+    <div class="col-sm-7 my-5">
+      <ul>
+        <li class="fw-bold"><span style="color:red">No -</span> {{tn.train_no}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Name -</span> {{tn.train_name}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Source -</span> {{tn.train_from}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Destination -</span> {{tn.train_to}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Price -</span> {{tn.train_price}}</li>
+        <hr />
+        <li class="fw-bold"><span style="color:red">Seat No -</span> {{seat_no}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

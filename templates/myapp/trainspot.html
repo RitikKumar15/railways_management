@@ -1,0 +1,76 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}Spot Your Train{% endblock title %}
+
+{% block css %}
+<style type="text/css" media="all">
+ html, body{
+  color: white;
+   background: url("{% static 'myapp/images/bg-image.jpg' %}") no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+ }
+ 
+ table, tr, th, td{
+   border: 1px solid white;
+   color: white;
+   text-align: center;
+ }
+</style>
+{% endblock css %}
+
+{% block main-content %}
+ <div class="container my-3">
+   <h1 class="fw-bold text-center"><u>Search Your Train Here!</u></h1>
+   <form class="form-group" action="" method="POST" accept-charset="utf-8">
+     {% csrf_token %}
+     {{form.as_p}}
+     <div class="d-grid d-block fw-bold">
+       <button type="submit" class="btn btn-danger">Search</button>
+     </div>
+   </form>
+   <hr class="muted-text bg-danger"/>
+   {% if tn_search %}
+     <h3 class="fw-bold text-center my-4"><u>Results Trains</u></h3>
+     <table class="table hover">
+       <thead>
+         <tr>
+           <th scope="col">No</th>
+           <th scope="col">Name</th>
+           <th scope="col">Source</th>
+           <th scope="col">Destination</th>
+           <th scope="col">Category</th>
+           <th scope="col">Days</th>
+           <th scope="col">Time</th>
+           <th scope="col">Action</th>
+         </tr>
+         </thead>
+         <tbody>
+           {% for tn in tn_search %}
+             <tr>
+               <td>{{tn.train_no}}</td>
+               <td>{{tn.train_name}}</td>
+               <td>{{tn.train_from}}</td>
+               <td>{{tn.train_to}}</td>
+               <td>{{tn.train_category}}</td>
+               <td>{{tn.running_days}}</td>
+               <td>{{tn.time_taken}}</td>
+               <td>
+                 <form class="form-group" action="/ticket" method="POST" accept-charset="utf-8">
+                   {% csrf_token %}
+                   <input type="hidden" name="tid" id="tid" value="{{tn.id}}" />
+                   <button type="submit" class="btn btn-warning">Book</button>
+                 </form>
+               </td>
+             </tr>
+           {% endfor %}
+         <tbody>
+       </table>
+       {% if not tn_search %}
+         <h4 class="fw-bold">No Results Found!</h4>
+       {% endif %}
+   {% endif %}
+ </div>
+{% endblock main-content %}

@@ -1,0 +1,39 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block css %}
+<style type="text/css" media="all">
+html, body{
+  color: white;
+   background: url("{% static 'myapp/images/bg-image.jpg' %}") no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+ }
+ </style>
+ {% endblock css %}
+ 
+ {% block main-content %}
+  <div class="container my-3">
+    <h1 class="fw-bold text-center"><u>User Login Form</u></h1>
+    <form class="form-group" action="" method="POST" accept-charset="utf-8">
+      {% csrf_token %}
+      {% for fm in form %}
+      <div class="my-2">
+        {{fm.label_tag}}
+      </div>
+      <div class="my-2">
+        {{fm}}
+      </div>
+      <div class="my-2">
+        {{fm.errors|striptags}}
+      </div>
+      {% endfor %}
+      <div class="d-grid d-block fw-bold">
+        <input type="submit" class="btn btn-danger my-2" value="Save/Next" />
+      </div>
+    </form>
+  </div>
+ {% endblock main-content %}
